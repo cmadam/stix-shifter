@@ -1,3 +1,4 @@
+import os
 import sys
 from table_setup import TableSetup
 
@@ -10,7 +11,9 @@ def main():
     # Name of table you wish to create and populate
     table = sys.argv[3]
     # CSV file containing field names in the first row, data types in the second row, and associated data in subsequent rows.
-    data_file = open('data.csv')
+    data_file_path = os.path.join(os.getenv('HOME'), 'stix-shifter',
+                                  'stix_shifter', 'scripts', 'mysql_populate_script', 'data.csv')
+    data_file = open(data_file_path)
 
     table_setup = TableSetup(connection, database, table, data_file)
     table_setup.create_database()
